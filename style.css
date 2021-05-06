@@ -22,6 +22,7 @@
 .cells-content{
     height: calc( 100vh - 110px );
     overflow: auto;
+    position: relative;
 }
 
 .sheets{
@@ -38,6 +39,74 @@
     min-height: 25px;
     min-width: 80px;        
     outline: none;
-    border-bottom: 2px solid lightgray;
-    border-right: 2px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    background: white;
+}
+
+.cells{
+    position: absolute;
+    top: 25px;
+    left: 20px;
+}
+
+.top-left-cell{
+
+    height: 25px;
+
+    width: 20px;
+
+    background: lightgray;
+
+    position: absolute;
+
+    z-index: 3;
+}
+
+.top-row{
+
+    display: flex;
+
+    position: absolute;
+
+    left: 19px;
+
+    top: 0px;
+
+    background: white;
+
+    z-index: 2;
+}
+
+.top-row-cell{
+
+    min-width: 80px;
+
+    min-height: 25px;
+
+    text-align: center;
+
+    border-left: 1px solid lightgray;
+
+    border-bottom: 1px solid lightgray;
+
+    border-top: 1px solid lightgray;
+}
+
+.left-column{
+    z-index: 2;
+    width: 20px;
+    position: absolute;
+    top: 25px;
+    background: white;}
+
+.left-column-cell{
+    
+    text-align: center;
+        
+    border-bottom: 1px solid lightgray;
+        
+    border-right: 1px solid lightgray;
+        
+    height: 25px;
 }
