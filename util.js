@@ -9,8 +9,10 @@ function solveFormula(formula, targetCell)
             let {rowId, colId} = getRowColIdFromAddress(comp)
             let cellData = db[rowId][colId]
             let value = cellData.value
-            if(targetCell && !db[rowId][colId].dependents.includes(targetCell))
-                db[rowId][colId].dependents.push(targetCell);
+            if(targetCell && !db[rowId][colId].children.includes(targetCell))
+            {    db[rowId][colId].children.push(targetCell);
+                 targetCell.parents.push(comp)
+            }
             formula = formula.replace(comp, value)
         }
     }
@@ -26,15 +28,30 @@ function getRowColIdFromAddress(address){
 
 function updateChildren(cell)
 {
-    for(let i=0; i<cell.dependents.length; ++i)
+    for(let i=0; i<cell.children.length; ++i)
     {
-        let dependentCell = cell.dependents[i];
-        let solvedValue = solveFormula(dependentCell.formula)
-        let {rowId, colId} = getRowColIdFromAddress(dependentCell.name)
+        let childCell = cell.children[i];
+        let solvedValue = solveFormula(childCell.formula)
+        let {rowId, colId} = getRowColIdFromAddress(childCell.name)
 
         let targetCell = document.querySelector(`[rowid="${rowId}"][colid="${colId}"]`)
         targetCell.textContent = solvedValue
         db[rowId][colId].value = solvedValue
-        changeDependents(dependentCell)
+        updateChildren(childCell)
     }
+}
+
+function deleteFormula(cellObject)
+{
+    cellObject.formula = "";
+    for(let i=0; i<cellObject.parents.length; ++i)
+    {
+        let parentName = cellObject.parents[i];
+        let {rowId, colId} = getRowColIdFromAddress(parentName);
+        let parentCell = db[rowId][colId]
+        parentCell.children = parentCell.children.filter(child => {
+            return child.name!=cellObject.name;
+        })
+    }
+    cellObject.parents=[]
 }

@@ -52,7 +52,8 @@ function initDB()
                 name: String.fromCharCode(65+j)+(i+1)+"",
                 value:"",
                 formula:"",
-                dependents:[]
+                children:[],
+                parents:[]
             }
             row.push(obj)
         }

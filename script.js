@@ -1,5 +1,6 @@
 let topRow = document.querySelector(".top-row");
 let topRowCells = document.querySelectorAll(".top-row-cell");
+let leftColCells = document.querySelectorAll(".left-column-cell");
 let leftCol = document.querySelector(".left-column");
 let topLeftCell = document.querySelector(".top-left-cell");
 let cells = document.querySelector(".cells");
@@ -25,8 +26,17 @@ let lastSelectedCell;
 cells.addEventListener("click", function(e){
     
     let currentCell = e.target;
+    rowId = Number(currentCell.getAttribute("rowid"));
+    colId = Number(currentCell.getAttribute("colid"));
+
     if(document.querySelector(".highlight-cell"))
+    {   
+        let r = Number(document.querySelector(".highlight-cell").getAttribute("rowid"))
+        let c = Number(document.querySelector(".highlight-cell").getAttribute("colid"))
         document.querySelector(".highlight-cell").classList.remove("highlight-cell")
+        topRowCells[c].style.background = ""
+        leftColCells[r].style.background = "#ecf0f1e7"
+    }
     
     if(document.querySelector(".highlight-col"))
     {
@@ -39,8 +49,8 @@ cells.addEventListener("click", function(e){
     }
     
     currentCell.classList.add("highlight-cell")
-    rowId = Number(currentCell.getAttribute("rowid"));
-    colId = Number(currentCell.getAttribute("colid"));
+    topRowCells[colId].style.background = "lightgray"
+    leftColCells[rowId].style.background = "lightgray"
     let address = String.fromCharCode(65+rowId)+(colId+1)+"";
     let cellData = db[rowId][colId]
     addressInput.value = address
@@ -55,10 +65,11 @@ for(let i=0; i<cells.clientHeight; ++i)
         let value = currentElement.textContent;
         let cellData = db[rowId][colId]; 
         if(value != cellData.value){
-        {
-            cellData.value = value;
-            updateChildren(cellData)
-        };
+            {   if(cellData.formula)
+                    deleteFormula(cellData)
+                cellData.value = value;
+                updateChildren(cellData)
+            }
         }
     })
 }
@@ -68,15 +79,13 @@ formulaInput.addEventListener("blur", function(e){
     if(formula && lastSelectedCell)
     {   
         let cellData = db[rowId][colId];
-        let targetCell = db[Number(lastSelectedCell.getAttribute("rowid"))][Number(lastSelectedCell.getAttribute("colid"))];
-        //console.log(lastSelectedCell);
-        let solvedValue = solveFormula(formula, targetCell)
+        let solvedValue = solveFormula(formula, cellData)
         //setting in UI
         lastSelectedCell.textContent = solvedValue
         //setting in DB
-        targetCell.value = solvedValue
-        targetCell.formula = formula
-
+        cellData.value = solvedValue
+        cellData.formula = formula
+        updateChildren(cellData)
     }
 })
 
