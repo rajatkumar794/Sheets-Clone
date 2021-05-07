@@ -1,4 +1,5 @@
 let topRow = document.querySelector(".top-row");
+let topRowCells = document.querySelectorAll(".top-row-cell");
 let leftCol = document.querySelector(".left-column");
 let topLeftCell = document.querySelector(".top-left-cell");
 let cells = document.querySelector(".cells");
@@ -22,7 +23,22 @@ let colId;
 let lastSelectedCell;
 
 cells.addEventListener("click", function(e){
+    
     let currentCell = e.target;
+    if(document.querySelector(".highlight-cell"))
+        document.querySelector(".highlight-cell").classList.remove("highlight-cell")
+    
+    if(document.querySelector(".highlight-col"))
+    {
+        let elements = document.querySelectorAll(".highlight-col")
+        elements[0].style.borderTop="";
+        for(let i=0; i<elements.length; ++i)
+            elements[i].classList.remove("highlight-col")
+        elements[elements.length-1].style.borderBottom=""
+            
+    }
+    
+    currentCell.classList.add("highlight-cell")
     rowId = Number(currentCell.getAttribute("rowid"));
     colId = Number(currentCell.getAttribute("colid"));
     let address = String.fromCharCode(65+rowId)+(colId+1)+"";
@@ -48,12 +64,43 @@ formulaInput.addEventListener("blur", function(e){
     let formula = formulaInput.value;
     if(formula && lastSelectedCell)
     {   
-        let solvedValue = solveFormula(formula)
+        let cellData = db[rowId][colId];
+        let targetCell = db[Number(lastSelectedCell.getAttribute("colid"))][Number(lastSelectedCell.getAttribute("rowid"))];
+        //console.log(lastSelectedCell);
+        let solvedValue = solveFormula(formula, targetCell)
         //setting in UI
         lastSelectedCell.textContent = solvedValue
         //setting in DB
-        let cellData = db[rowId][colId];
         cellData.value = solvedValue
         cellData.formula = formula
+        console.log(db);
     }
 })
+
+for(let i=0; i<topRowCells.length; ++i)
+{   
+    topRowCells[i].addEventListener("click", function(e){
+        if(document.querySelector(".highlight-cell"))
+            document.querySelector(".highlight-cell").classList.remove("highlight-cell")
+            
+        if(document.querySelector(".highlight-col"))
+        {
+            let elements = document.querySelectorAll(".highlight-col")
+            elements[0].style.borderTop="";
+            for(let i=0; i<elements.length; ++i)
+                elements[i].classList.remove("highlight-col")
+            elements[elements.length-1].style.borderBottom=""
+                
+        }
+            
+        let colName = e.target.innerText;
+        let colId = colName.charCodeAt(0)-65;
+        let colCells = document.querySelectorAll(`[colid="${colId}"]`)
+        
+        colCells[0].style.borderTop = "2px solid black";
+        for(let j=0; j<colCells.length; ++j)
+            colCells[j].classList.add("highlight-col")
+        colCells[colCells.length-1].style.borderBottom = "2px solid black";
+        colCells[0].style.background="white"
+    })
+}

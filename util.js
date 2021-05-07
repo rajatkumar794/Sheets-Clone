@@ -1,7 +1,6 @@
-function solveFormula(formula)
+function solveFormula(formula, targetCell)
 {
     let fcomp = formula.split(" ")
-    console.log(fcomp);
     for(let i=0; i<fcomp.length; ++i)
     {
         let comp = fcomp[i]
@@ -10,11 +9,10 @@ function solveFormula(formula)
             let {rowId, colId} = getRowColIdFromAddress(comp)
             let cellData = db[rowId][colId]
             let value = cellData.value
-            
+            db[rowId][colId].dependents.push(targetCell);
             formula = formula.replace(comp, value)
         }
     }
-    console.log(formula);
     return  eval(formula)
 }
 

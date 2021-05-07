@@ -6,14 +6,13 @@
 
 .menu{
     height: 25px;
-    background: green;
+    background: #27ae60;
     color: white;
 }
 
 .menu-options{
     height: 35px;
-    background: rgb(5, 170, 5);
-    color: white;
+    background: #ecf0f1;
 }
 
 .calculations{
@@ -29,7 +28,7 @@
 
 .sheets{
     height: 25px;
-    background: aquamarine;
+    background: #dfe4ea;
 }
 
 .row{
@@ -38,8 +37,8 @@
 
 .cell{
     
-    min-height: 25px;
-    min-width: 80px;        
+    height: 25px;
+    width: 80px;        
     outline: none;
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
@@ -109,4 +108,20 @@
     border: none;
     width: 100%;
     padding: 5px;
+}
+
+.highlight-cell
+{
+    border: 2px solid black;
+}
+
+.highlight-col
+{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    background: #dfe4ea;
+}
+
+.top-row-cell:hover{
+    background: #78e08f;
 }

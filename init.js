@@ -51,7 +51,8 @@ function initDB()
             let obj = {
                 name: String.fromCharCode(65+i)+(j+1)+"",
                 value:"",
-                formula:""
+                formula:"",
+                dependents:[]
             }
             row.push(obj)
         }
