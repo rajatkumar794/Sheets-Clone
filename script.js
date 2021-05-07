@@ -55,7 +55,10 @@ for(let i=0; i<cells.clientHeight; ++i)
         let value = currentElement.textContent;
         let cellData = db[rowId][colId]; 
         if(value != cellData.value){
+        {
             cellData.value = value;
+            updateChildren(cellData)
+        };
         }
     })
 }
@@ -65,15 +68,15 @@ formulaInput.addEventListener("blur", function(e){
     if(formula && lastSelectedCell)
     {   
         let cellData = db[rowId][colId];
-        let targetCell = db[Number(lastSelectedCell.getAttribute("colid"))][Number(lastSelectedCell.getAttribute("rowid"))];
+        let targetCell = db[Number(lastSelectedCell.getAttribute("rowid"))][Number(lastSelectedCell.getAttribute("colid"))];
         //console.log(lastSelectedCell);
         let solvedValue = solveFormula(formula, targetCell)
         //setting in UI
         lastSelectedCell.textContent = solvedValue
         //setting in DB
-        cellData.value = solvedValue
-        cellData.formula = formula
-        console.log(db);
+        targetCell.value = solvedValue
+        targetCell.formula = formula
+
     }
 })
 

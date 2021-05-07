@@ -49,7 +49,7 @@ function initDB()
         for(let j=0; j<26; ++j)
         {
             let obj = {
-                name: String.fromCharCode(65+i)+(j+1)+"",
+                name: String.fromCharCode(65+j)+(i+1)+"",
                 value:"",
                 formula:"",
                 dependents:[]
