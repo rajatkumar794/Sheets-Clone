@@ -29,6 +29,8 @@
 .sheets{
     height: 25px;
     background: #dfe4ea;
+    display: flex;
+    align-items: center;
 }
 
 .row{
@@ -124,8 +126,32 @@
 
 .top-row-cell:hover{
     background: #78e08f;
+    cursor: pointer;
 }
 
 .left-column-cell:hover{
     background: #78e08f;
+    cursor: pointer;
+}
+
+.add-sheet .fas {
+}
+
+.sheet-list {
+    display: flex;
+    height: 100%;
+}
+
+.sheet {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid gray;
+    background: lightgrey;
+    cursor: pointer;
+}
+
+.active-sheet {
+    background: white;
 }

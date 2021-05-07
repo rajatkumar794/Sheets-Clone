@@ -37,11 +37,12 @@ let cellsContent = document.querySelector(".cells-content");
     cellsContent.innerHTML = cellsContentHtml
 })()
 
+let sheetsDB = []
 let db;
 
 function initDB()
 {
-    db = []
+    let newdb = []
 
     for(let i=0; i<100; ++i)
     {
@@ -57,8 +58,10 @@ function initDB()
             }
             row.push(obj)
         }
-        db.push(row)
+        newdb.push(row)
     }
+    db=newdb
+    sheetsDB.push(newdb)
 }
 
 initDB()
