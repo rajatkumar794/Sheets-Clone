@@ -191,20 +191,27 @@
     border-radius: 5px;
 }
 
-.active-menu{
-    background: lightgray;
-}
-
-.font-family{
-    
-}
-
-#font-family{
-    /* background: #ecedec; */
+.font-family {
     width: 180px !important;
-    
 }
 
-#font-size{
-    background: #ecedec;
+#font-family {
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 13px;
+    background: #ECEDEC;
+}
+
+#font-size {
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 13px;
+    background: #ECEDEC;
+}
+
+.active-menu {
+    background: lightgray;
 }
