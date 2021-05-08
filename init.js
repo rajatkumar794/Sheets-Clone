@@ -17,7 +17,7 @@ let cellsContent = document.querySelector(".cells-content");
     //left column
     cellsContentHtml+= `<div class="left-column">`
     for(let i=0; i<100; i++){
-        cellsContentHtml+= `<div class="left-column-cell">${i+1}</div>`
+        cellsContentHtml+= `<div class="left-column-cell" cell-id="${i}">${i+1}</div>`
     }
     cellsContentHtml+= `</div>`
 
@@ -54,7 +54,9 @@ function initDB()
                 value:"",
                 formula:"",
                 children:[],
-                parents:[]
+                parents:[],
+                fontStyle: { bold: false, italic: false, underline: false},
+                textAlign: "left"
             }
             row.push(obj)
         }

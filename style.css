@@ -11,8 +11,11 @@
 }
 
 .menu-options{
-    height: 35px;
-    background: #ecf0f1;
+    height: 60px;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+    background: #27ae60;
 }
 
 .calculations{
@@ -39,7 +42,7 @@
 
 .cell{
     
-    height: 25px;
+    min-height: 25px;
     width: 80px;        
     outline: none;
     border-bottom: 1px solid lightgray;
@@ -154,4 +157,54 @@
 
 .active-sheet {
     background: white;
+}
+
+.menu-options>div {
+    display: flex;
+    align-items: center;
+    height: 70%;
+    width: 150px;
+    justify-content: space-around;
+    border-right: 1px solid lightgray;
+}
+
+.font-styles div:hover , .font-alignment div:hover {
+    background: lightgray;
+    opacity: 0.7;
+}
+
+.font-styles div {
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.font-alignment div {
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.active-menu{
+    background: lightgray;
+}
+
+.font-family{
+    
+}
+
+#font-family{
+    /* background: #ecedec; */
+    width: 180px !important;
+    
+}
+
+#font-size{
+    background: #ecedec;
 }

@@ -8,6 +8,7 @@ let addressInput = document.querySelector("#address");
 let formulaInput = document.querySelector("#formula");
 let allCells = document.querySelectorAll(".cell");
 
+let visitedCells = []
 
 cellsContent.addEventListener("scroll" , function(e){
     let top = e.target.scrollTop ;
@@ -28,6 +29,7 @@ cells.addEventListener("click", function(e){
     let currentCell = e.target;
     rowId = Number(currentCell.getAttribute("rowid"));
     colId = Number(currentCell.getAttribute("colid"));
+    visitedCells.push(document.querySelector(`[rowid="${rowId}"][colid="${colId}"]`))
 
     if(document.querySelector(".highlight-cell"))
     {   
@@ -55,6 +57,8 @@ cells.addEventListener("click", function(e){
     let cellData = db[rowId][colId]
     addressInput.value = address
     formulaInput.value = cellData.formula
+
+    setMenu(cellData); 
 })
 
 for(let i=0; i<cells.clientHeight; ++i)
@@ -71,6 +75,14 @@ for(let i=0; i<cells.clientHeight; ++i)
                 updateChildren(cellData)
             }
         }
+    })
+
+    allCells[i].addEventListener("keyup", function(e){
+        let cellHeight = e.target.getBoundingClientRect().height;
+        let rowId = e.target.getAttribute("rowid");
+        let row = document.querySelector(`div[cell-id="${rowId}"]`)
+        row.style.height = cellHeight+"px"
+        // e.target.style.border = "2px solid black;"
     })
 }
 

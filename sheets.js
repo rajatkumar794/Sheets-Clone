@@ -4,6 +4,7 @@ let sheetId = 0;
 
 addSheet.addEventListener("click" , handleAddSheet);
 sheetsList.addEventListener("click" , handleSheetSwitch)
+sheetsList.addEventListener("dblclick" , removeSheet)
 
 function handleAddSheet(e){
     sheetId++;
@@ -22,6 +23,7 @@ function handleAddSheet(e){
 
     // initUI
     initUI();
+
 }
 function handleSheetSwitch(e){
     let selectedSheet = e.target;
@@ -40,15 +42,45 @@ function handleSheetSwitch(e){
 }
 
 function initUI(){
-    for(let i=0 ; i<allCells.length ; i++){
-        allCells[i].textContent = "";
+    for(let i=0 ; i<visitedCells.length ; i++){
+        visitedCells[i].textContent = "";
     }
+    formulaInput.value=""
+    if(document.querySelector(".active-menu"))
+        document.querySelector(".active-menu").classList.remove("active-menu")
 }
 
 function setUI(){
-    for(let i=0 ; i<allCells.length ; i++){
-        let rowId = allCells[i].getAttribute("rowid");
-        let colId = allCells[i].getAttribute("colid"); 
-        allCells[i].textContent = db[rowId][colId].value;
+    for(let i=0 ; i<visitedCells.length ; i++){
+        let rowId = visitedCells[i].getAttribute("rowid");
+        let colId = visitedCells[i].getAttribute("colid");
+        let cellObject = db[rowId][colId]
+        visitedCells[i].textContent = cellObject.value;
+        visitedCells[i].style.fontWeight = cellObject.fontStyle.bold ? "bold" : "normal";
+        visitedCells[i].style.fontStyle = cellObject.fontStyle.italic ? "italic" : "normal";
+        visitedCells[i].style.fontDecoration = cellObject.fontStyle.bold ? "underline" : "normal";
+        visitedCells[i].style.textAlign = cellObject.textAlign
     }
+    formulaInput.value=""
 } 
+
+function setMenu(){
+    
+}
+
+function removeSheet(e)
+{
+    let currentSheet = e.target;
+    let selectedSheetId = Number(currentSheet.getAttribute("sid"));
+    let previousSheet = sheetsList.querySelector(`[sid="${selectedSheetId-1}"]`);
+    currentSheet.remove()
+    
+    previousSheet.classList.add("active-sheet");
+
+    // db set
+    
+    db = sheetsDB[selectedSheetId-1];
+
+    // ui set
+    setUI();
+}
