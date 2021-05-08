@@ -10,6 +10,7 @@ let center = document.querySelector(".center");
 let fontFamily = document.querySelector("#font-family")
 let fontSize = document.querySelector("#font-size")
 
+let fontFamilyOptions = ["Arial", "Georgia", "Tahoma", "Calibri", "Lucida"]
 bold.addEventListener("click" , function(e){
     let cellObject = db[rowId][colId];
     if(cellObject.fontStyle.bold){
@@ -83,28 +84,9 @@ center.addEventListener("click", function(e){
 fontFamily.addEventListener("change", function(e){
     let fontFamilyIndex = Number(e.target.selectedIndex);
     let cellObject = db[rowId][colId]
-    if(fontFamilyIndex==0)
-    {   cellObject.fontFamily = "Arial"
-        lastSelectedCell.style.fontFamily = cellObject.fontFamily;
-    }
-    else if(fontFamilyIndex==1)
-    {   cellObject.fontFamily = "Georgia";
-        lastSelectedCell.style.fontFamily = cellObject.fontFamily;
-    }
-    else if(fontFamilyIndex==2)
-    {   
-        cellObject.fontFamily = "Tahoma";
-        lastSelectedCell.style.fontFamily = cellObject.fontFamily;
-    }   
-    else if(fontFamilyIndex==3)
-    {
-        cellObject.fontFamily = "Calibri";
-        lastSelectedCell.style.fontFamily = cellObject.fontFamily;
-    }
-    else if(fontFamilyIndex==4)
-    {   cellObject.fontFamily = "Lucida";
-        lastSelectedCell.style.fontFamily = cellObject.fontFamily;
-    }
+    cellObject.fontFamily = fontFamilyOptions[fontFamilyIndex]
+    lastSelectedCell.style.fontFamily = cellObject.fontFamily;
+    
 })
 
 fontSize.addEventListener("change" , function(e)
@@ -112,6 +94,7 @@ fontSize.addEventListener("change" , function(e)
     let cellObject = db[rowId][colId]
     let newFontSize = fontSize.value;
     lastSelectedCell.style.fontSize = newFontSize+"px"
+    cellObject.fontSize = newFontSize
 })
 
 function setMenu(cellObject){

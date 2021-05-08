@@ -57,8 +57,8 @@ function initDB()
                 parents:[],
                 fontStyle: { bold: false, italic: false, underline: false},
                 textAlign: "left",
-                fontFamily: "Arial",
-                fontSize: "16px",
+                fontFamily: 0,
+                fontSize: 16,
             }
             row.push(obj)
         }

@@ -60,12 +60,14 @@ function setUI(){
         visitedCells[i].style.fontStyle = cellObject.fontStyle.italic ? "italic" : "normal";
         visitedCells[i].style.fontDecoration = cellObject.fontStyle.bold ? "underline" : "normal";
         visitedCells[i].style.textAlign = cellObject.textAlign
+        visitedCells[i].style.fontFamily = fontFamilyOptions[cellObject.fontFamily]
+        visitedCells[i].style.fontSize = cellObject.fontSize+"px"
     }
     formulaInput.value=""
 } 
 
 function setMenu(){
-    
+
 }
 
 function removeSheet(e)
