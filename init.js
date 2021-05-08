@@ -59,6 +59,8 @@ function initDB()
                 textAlign: "left",
                 fontFamily: 0,
                 fontSize: 16,
+                fontColor: "black",
+                cellColor: "white",
             }
             row.push(obj)
         }

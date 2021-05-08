@@ -44,6 +44,7 @@ function handleSheetSwitch(e){
 function initUI(){
     for(let i=0 ; i<visitedCells.length ; i++){
         visitedCells[i].textContent = "";
+        allCells[i].style="";
     }
     formulaInput.value=""
     if(document.querySelector(".active-menu"))
@@ -62,6 +63,8 @@ function setUI(){
         visitedCells[i].style.textAlign = cellObject.textAlign
         visitedCells[i].style.fontFamily = fontFamilyOptions[cellObject.fontFamily]
         visitedCells[i].style.fontSize = cellObject.fontSize+"px"
+        visitedCells[i].style.color = cellObject.fontColor
+        visitedCells[i].style.background = cellObject.cellColor
     }
     formulaInput.value=""
 } 

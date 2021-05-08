@@ -9,8 +9,12 @@ let center = document.querySelector(".center");
 
 let fontFamily = document.querySelector("#font-family")
 let fontSize = document.querySelector("#font-size")
-
 let fontFamilyOptions = ["Arial", "Georgia", "Tahoma", "Calibri", "Lucida"]
+
+let fontStyleColor = document.querySelector(".font-style-color")
+let cellColor = document.querySelector(".cell-color")
+
+
 bold.addEventListener("click" , function(e){
     let cellObject = db[rowId][colId];
     if(cellObject.fontStyle.bold){
@@ -89,12 +93,25 @@ fontFamily.addEventListener("change", function(e){
     
 })
 
-fontSize.addEventListener("change" , function(e)
-{   
+fontSize.addEventListener("change" , function(e){   
     let cellObject = db[rowId][colId]
     let newFontSize = fontSize.value;
     lastSelectedCell.style.fontSize = newFontSize+"px"
     cellObject.fontSize = newFontSize
+})
+
+fontStyleColor.addEventListener("change", function(e){
+    let cellObject = db[rowId][colId]
+    let newFontColor = e.target.value;
+    lastSelectedCell.style.color = newFontColor;
+    cellObject.fontColor = newFontColor
+})
+
+cellColor.addEventListener("change", function(e){
+    let cellObject = db[rowId][colId]
+    let newCellColor = e.target.value;
+    lastSelectedCell.style.background = newCellColor;
+    cellObject.cellColor = newCellColor
 })
 
 function setMenu(cellObject){
