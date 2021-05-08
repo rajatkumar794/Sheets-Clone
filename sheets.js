@@ -14,7 +14,7 @@ function handleAddSheet(e){
     sheet.classList.add("sheet");
     sheet.classList.add("active-sheet");
     sheet.setAttribute("sid" , sheetId);
-    sheet.textContent = `Sheet ${sheetId+1}`;
+    sheet.textContent = `Sheet${sheetId+1}`;
 
     sheetsList.append(sheet);
 
